@@ -3,40 +3,170 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>CH Robinson – Documents</title>
+  <title>CH Robinson – Playbooks & SOPs</title>
   <link rel="stylesheet" href="theme.css" />
 </head>
 <body>
   <header class="app-header">
-    <img src="../assets/ch-robinson-logo.png" class="app-logo" alt="CH Robinson Logo" />
+    <img src="../assets/ch-robinson-logo.svg" class="app-logo" alt="CH Robinson Logo" />
   </header>
+
   <nav class="app-nav">
     <div class="app-nav-inner">
       <a href="dashboard.html" class="app-nav-link" id="navDashboard">Dashboard</a>
       <a href="research.html" class="app-nav-link" id="navResearch">Driver & Shipment Research</a>
-      <a href="documents.html" class="app-nav-link" id="navDocuments">Playbooks & SOPs</a>
+      <a href="documents.html" class="app-nav-link app-nav-active" id="navDocuments">Playbooks & SOPs</a>
       <a href="billing.html" class="app-nav-link" id="navBilling">Billing & Loads</a>
       <a href="login.html" class="app-nav-link app-nav-right">Logout</a>
     </div>
   </nav>
+
   <main class="app-main app-page-transition">
-    <section class="app-card">
-      <h2>Demo Page: Documents</h2>
-      <p>This is a placeholder. See the full bundle for live code and demo data.</p>
+    <section class="app-layout-2col">
+      <aside class="app-card">
+        <h3>Knowledge Playbooks</h3>
+        <ul style="list-style:none; padding-left:0; margin:0;">
+          <li>
+            <button class="app-btn-secondary" style="width:100%; margin-bottom:6px;"
+              onclick="selectDoc('Driver Status – Virtual Agent Script', 'driver_va')">
+              Driver Status – Virtual Agent Script
+            </button>
+          </li>
+          <li>
+            <button class="app-btn-secondary" style="width:100%; margin-bottom:6px;"
+              onclick="selectDoc('Agent Copilot – Navisphere Assist', 'copilot_navisphere')">
+              Agent Copilot – Navisphere Assist
+            </button>
+          </li>
+          <li>
+            <button class="app-btn-secondary" style="width:100%; margin-bottom:6px;"
+              onclick="selectDoc('Virtual Supervisor – QA & Coaching', 'virtual_supervisor')">
+              Virtual Supervisor – QA & Coaching
+            </button>
+          </li>
+        </ul>
+      </aside>
+
+      <section class="app-card">
+        <h3 id="docTitle">How to use these playbooks</h3>
+        <p class="app-muted" id="docSubtitle">
+          Use this tab as your narrative anchor while you show how Genesys Knowledge and Copilot guide agents and supervisors.
+        </p>
+        <div id="docContent">
+          <p>
+            Each playbook here mirrors a knowledge article in Genesys Knowledge. In the live platform,
+            the same content powers:
+          </p>
+          <ul>
+            <li>Virtual Agent answers for drivers (“Happy Robot 2.0”).</li>
+            <li>Agent Copilot suggestions and summaries.</li>
+            <li>Supervisor coaching workflows and QA standards.</li>
+          </ul>
+        </div>
+        <div id="aiSummary" style="margin-top:16px; padding:10px 12px; border-radius:8px; background:#f1f5ff; border:1px solid #c7d2fe; display:none;">
+          <h4>AI Summary</h4>
+          <p id="aiSummaryBody"></p>
+        </div>
+      </section>
     </section>
   </main>
+
+  <script>
+    function selectDoc(title, key) {
+      const docTitle = document.getElementById("docTitle");
+      const docSubtitle = document.getElementById("docSubtitle");
+      const docContent = document.getElementById("docContent");
+      const aiSummary = document.getElementById("aiSummary");
+      const aiSummaryBody = document.getElementById("aiSummaryBody");
+
+      let bodyHtml = "";
+      let subtitle = "";
+      let summary = "";
+
+      if (key === "driver_va") {
+        subtitle = "Script and decisioning logic for the Driver Status Virtual Agent (Happy Robot 2.0).";
+        bodyHtml = `
+          <p><strong>Scenario:</strong> Driver calls to check shipment status.</p>
+          <ol>
+            <li>Greet driver, confirm preferred language.</li>
+            <li>Authenticate via phone number + load # or PO.</li>
+            <li>Query Navisphere / Dynamics for shipment status.</li>
+            <li>Provide real-time status and ETA.</li>
+            <li>Offer proactive SMS updates.</li>
+            <li>Escalate to live agent with full context if:
+              <ul>
+                <li>Exception detected (detention, OS&D, appointment change).</li>
+                <li>Driver requests policy clarification.</li>
+              </ul>
+            </li>
+          </ol>
+          <p><em>Note:</em> This logic is configured in Genesys AI Studio, not hard-coded IVR menus.</p>
+        `;
+        summary = "The Virtual Agent handles end-to-end driver status calls – authenticating, checking Navisphere, and escalating with full context when needed.";
+      } else if (key === "copilot_navisphere") {
+        subtitle = "How Copilot surfaces Navisphere insights to agents in real time.";
+        bodyHtml = `
+          <p><strong>Purpose:</strong> Reduce handle time and improve first-contact resolution for driver calls.</p>
+          <ul>
+            <li>Auto-summarize the VA portion of the call.</li>
+            <li>Display shipment and T-Code data from Navisphere.</li>
+            <li>Highlight risk signals (late arrival, dwell time, accessorial risk).</li>
+            <li>Suggest next best actions and wrap-up codes.</li>
+            <li>Log key details back to Dynamics / Navisphere.</li>
+          </ul>
+          <p>Agents stay in one workspace while Copilot orchestrates data from multiple systems.</p>
+        `;
+        summary = "Copilot keeps the agent in one pane of glass while pulling in Navisphere and Dynamics data, summarizing the call, and proposing next steps.";
+      } else if (key === "virtual_supervisor") {
+        subtitle = "AI-powered QA and coaching for driver interactions.";
+        bodyHtml = `
+          <p><strong>Virtual Supervisor capabilities:</strong></p>
+          <ul>
+            <li>Auto-score a large sample of calls against CH Robinson QA forms.</li>
+            <li>Detect adherence issues (AUX misuse, long after-call work).</li>
+            <li>Flag empathy, policy compliance, and script adherence.</li>
+            <li>Trigger coaching journeys directly to agents.</li>
+          </ul>
+          <p>
+            Supervisors move from manual call-spot-checking to data-driven coaching, saving hundreds
+            of hours per month.
+          </p>
+        `;
+        summary = "Virtual Supervisor replaces manual QA with AI scoring and targeted coaching journeys, surfacing the 5 calls that matter out of 5,000.";
+      } else {
+        subtitle = "Use this tab as your narrative anchor while you show how Genesys Knowledge and Copilot guide agents and supervisors.";
+        bodyHtml = `
+          <p>Select a playbook on the left to see how it maps to Genesys Knowledge and AI experiences.</p>
+        `;
+        summary = "";
+      }
+
+      docTitle.textContent = title;
+      docSubtitle.textContent = subtitle;
+      docContent.innerHTML = bodyHtml;
+
+      if (summary) {
+        aiSummary.style.display = "block";
+        aiSummaryBody.textContent = summary;
+      } else {
+        aiSummary.style.display = "none";
+        aiSummaryBody.textContent = "";
+      }
+    }
+  </script>
+
+  <!-- Messenger snippet -->
   <script type="text/javascript" charset="utf-8">
     (function (g, e, n, es, ys) {
       g['_genesysJs'] = e;
-      g[e] = g[e] || function () {
-        (g[e].q = g[e].q || []).push(arguments)
-      };
+      g[e] = g[e] || function () { (g[e].q = g[e].q || []).push(arguments) };
       g[e].t = 1 * new Date();
       g[e].c = es;
-      ys = document.createElement('script'); ys.async = 1; ys.src = n; ys.charset = 'utf-8'; document.head.appendChild(ys);
+      ys = document.createElement('script'); ys.async = 1; ys.src = n;
+      ys.charset = 'utf-8'; document.head.appendChild(ys);
     })(window, 'Genesys', 'https://apps.mypurecloud.com/genesys-bootstrap/genesys.min.js', {
       environment: 'prod',
-      deploymentId: '0042b643-9e47-4c81-b7c3-fbe66fb52dd8'
+      deploymentId: '{{MESSENGER_DEPLOYMENT_ID}}'
     });
   </script>
 </body>
