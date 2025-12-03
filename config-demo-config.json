@@ -1,0 +1,20 @@
+{
+  "id": "ch-robinson-happy-robot-2-0-demo",
+  "customerName": "CH Robinson",
+  "productName": "Navisphere CX Orchestrator",
+  "industry": "Logistics & Supply Chain",
+  "primaryPersona": "Elizabeth Smelter \u2013 Supervisor / CX Leader",
+  "secondaryPersonas": [
+    "Driver / Carrier Partner",
+    "Contact Center Agent"
+  ],
+  "theme": {
+    "brandColor": "#005bab",
+    "brandColorDark": "#00427f",
+    "logo": "../assets/ch-robinson-logo.png"
+  },
+  "messenger": {
+    "deploymentId": "0042b643-9e47-4c81-b7c3-fbe66fb52dd8",
+    "environment": "prod"
+  }
+}

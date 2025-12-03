@@ -1,0 +1,2 @@
+:root{--brand-primary:#005bab;--brand-primary-dark:#00427f;--bg-light:#f4f7fb;--card-bg:#fff;--border-radius:12px;--text-main:#1f2933;--text-muted:#6b7280;--border-subtle:#e2e2e2;}body{background:var(--bg-light);color:var(--text-main);font-family:Segoe UI,system-ui,sans-serif;}
+/* ...truncated for brevity, full version is as above... */
