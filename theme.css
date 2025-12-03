@@ -252,3 +252,13 @@ body {
   background: #e0f2fe;
   color: #0369a1;
 }
+
+.app-card {
+  overflow-x: auto; /* NEW: let cards scroll horizontally if content is too wide */
+}
+.app-table {
+  width: 100%;
+  max-width: 100%; /* NEW: prevent table from exceeding card width */
+  display: block;
+  overflow-x: auto;
+}
