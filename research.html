@@ -3,40 +3,174 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>CH Robinson – Research</title>
-  <link rel="stylesheet" href="../framework/theme.css" />
+  <title>CH Robinson – Driver & Shipment Research</title>
+  <link rel="stylesheet" href="theme.css" />
 </head>
 <body>
   <header class="app-header">
-    <img src="../assets/ch-robinson-logo.png" class="app-logo" alt="CH Robinson Logo" />
+    <img src="../assets/ch-robinson-logo.svg" class="app-logo" alt="CH Robinson Logo" />
   </header>
+
   <nav class="app-nav">
     <div class="app-nav-inner">
       <a href="dashboard.html" class="app-nav-link" id="navDashboard">Dashboard</a>
-      <a href="research.html" class="app-nav-link" id="navResearch">Driver & Shipment Research</a>
+      <a href="research.html" class="app-nav-link app-nav-active" id="navResearch">Driver & Shipment Research</a>
       <a href="documents.html" class="app-nav-link" id="navDocuments">Playbooks & SOPs</a>
       <a href="billing.html" class="app-nav-link" id="navBilling">Billing & Loads</a>
       <a href="login.html" class="app-nav-link app-nav-right">Logout</a>
     </div>
   </nav>
+
   <main class="app-main app-page-transition">
-    <section class="app-card">
-      <h2>Demo Page: Research</h2>
-      <p>This is a placeholder. See the full bundle for live code and demo data.</p>
+    <section class="app-layout-2col">
+      <!-- Left: search + journey context -->
+      <aside class="app-card">
+        <h3>Driver & Shipment Lookup</h3>
+        <p class="app-muted">
+          This simulates the agent view after a driver is handed off from the Virtual Agent.
+        </p>
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search by Driver ID, Load #, or PO"
+          style="width:100%; box-sizing:border-box; padding:8px 10px; margin:8px 0; border-radius:8px; border:1px solid #ccc;"
+        />
+        <button class="app-btn-primary" onclick="loadDriver()">
+          Pull from Navisphere (Demo)
+        </button>
+        <div style="margin-top:14px;">
+          <h4>Recent Driver Journeys</h4>
+          <ul class="app-muted" style="padding-left:18px;">
+            <li><a href="#" onclick="loadDriver('DRV-28419')">DRV-28419 – Late arrival risk</a></li>
+            <li><a href="#" onclick="loadDriver('DRV-77105')">DRV-77105 – Detention in progress</a></li>
+            <li><a href="#" onclick="loadDriver('DRV-99042')">DRV-99042 – Proof-of-delivery check</a></li>
+          </ul>
+        </div>
+      </aside>
+
+      <!-- Right: AI Copilot, context panel -->
+      <section class="app-card">
+        <h3 id="driverTitle">Driver context</h3>
+        <p class="app-muted" id="driverSubtitle">
+          Use this space to narrate how Genesys pulls in Navisphere and Dynamics data via open APIs and RAG.
+        </p>
+
+        <div id="driverDetails" style="margin-top:10px; font-size:0.9rem;">
+          <p><strong>Driver ID:</strong> —</p>
+          <p><strong>Load #:</strong> —</p>
+          <p><strong>Route:</strong> —</p>
+          <p><strong>Status:</strong> —</p>
+        </div>
+
+        <hr style="margin:14px 0; border:none; border-top:1px solid #e5e7eb;" />
+
+        <h4>Copilot Assist</h4>
+        <p class="app-muted" id="copilotSummary">
+          When the driver reaches an agent, Genesys Copilot summarizes the conversation to this point,
+          surfaces risk factors, and suggests next best actions – grounded in Navisphere and Dynamics.
+        </p>
+        <ul class="app-muted" id="copilotActions">
+          <li>– Suggested wrap-up code: <strong>Driver status provided</strong></li>
+          <li>– Offer proactive SMS updates for this lane</li>
+          <li>– Flag chronic delay pattern to supervisor</li>
+        </ul>
+
+        <button class="app-btn-secondary" onclick="simulateCallbackFlow()">
+          Show Driver Callback Workflow
+        </button>
+      </section>
     </section>
   </main>
+
+  <script>
+    function loadDriver(id) {
+      const driverId = id || document.getElementById('searchInput').value || 'DRV-28419';
+
+      const demoData = {
+        'DRV-28419': {
+          title: 'DRV-28419 – Live ETA check',
+          subtitle: 'Driver calling from I-35 corridor, looking for updated ETA to Dallas DC.',
+          load: 'LD-772104',
+          route: 'Chicago, IL → Dallas, TX',
+          status: 'On time, minor congestion near Oklahoma City',
+          copilotSummary:
+            'Virtual Agent authenticated the driver using phone + load # and provided base ETA. Driver requested live agent to confirm updated DC arrival time.',
+          actions: [
+            'Confirm ETA using Navisphere and share in-channel',
+            'Offer SMS for proactive delay alerts',
+            'Tag as “High value load” for Journey Management'
+          ]
+        },
+        'DRV-77105': {
+          title: 'DRV-77105 – Detention risk',
+          subtitle: 'Driver at receiver for 90+ minutes; calling to confirm next steps and detention.',
+          load: 'LD-661908',
+          route: 'Memphis, TN → Atlanta, GA',
+          status: 'At dock – detention threshold nearing',
+          copilotSummary:
+            'Virtual Agent answered initial detention policy questions and then escalated due to policy exception.',
+          actions: [
+            'Check detention policy in knowledge',
+            'Notify customer and log event in Dynamics',
+            'Schedule follow-up if dwell exceeds threshold'
+          ]
+        },
+        'DRV-99042': {
+          title: 'DRV-99042 – POD confirmation',
+          subtitle: 'Driver wants to confirm POD uploaded correctly to Navisphere.',
+          load: 'LD-998312',
+          route: 'Kansas City, MO → Denver, CO',
+          status: 'Delivered – POD under review',
+          copilotSummary:
+            'VA handled standard POD FAQ. Escalated to agent when driver reported mismatch between paper POD and system.',
+          actions: [
+            'Validate POD in Navisphere',
+            'Re-send POD confirmation to driver via SMS',
+            'Log quality issue for carrier performance team'
+          ]
+        }
+      };
+
+      const selected = demoData[driverId] || demoData['DRV-28419'];
+
+      document.getElementById('driverTitle').textContent = selected.title;
+      document.getElementById('driverSubtitle').textContent = selected.subtitle;
+
+      document.getElementById('driverDetails').innerHTML = `
+        <p><strong>Driver ID:</strong> ${driverId}</p>
+        <p><strong>Load #:</strong> ${selected.load}</p>
+        <p><strong>Route:</strong> ${selected.route}</p>
+        <p><strong>Status:</strong> ${selected.status}</p>
+      `;
+
+      document.getElementById('copilotSummary').textContent = selected.copilotSummary;
+
+      document.getElementById('copilotActions').innerHTML = selected.actions
+        .map(a => '<li>– ' + a + '</li>')
+        .join('');
+    }
+
+    function simulateCallbackFlow() {
+      alert(
+        'Narrate Scenario 4: Admin Agility –\n\n' +
+        '“Imagine opening AI Studio from here to tweak the driver callback workflow.\n' +
+        'We can change callback windows, routing rules, and guardrails – then publish in minutes.”'
+      );
+    }
+  </script>
+
+  <!-- Messenger snippet -->
   <script type="text/javascript" charset="utf-8">
     (function (g, e, n, es, ys) {
       g['_genesysJs'] = e;
-      g[e] = g[e] || function () {
-        (g[e].q = g[e].q || []).push(arguments)
-      };
+      g[e] = g[e] || function () { (g[e].q = g[e].q || []).push(arguments) };
       g[e].t = 1 * new Date();
       g[e].c = es;
-      ys = document.createElement('script'); ys.async = 1; ys.src = n; ys.charset = 'utf-8'; document.head.appendChild(ys);
+      ys = document.createElement('script'); ys.async = 1; ys.src = n;
+      ys.charset = 'utf-8'; document.head.appendChild(ys);
     })(window, 'Genesys', 'https://apps.mypurecloud.com/genesys-bootstrap/genesys.min.js', {
       environment: 'prod',
-      deploymentId: '0042b643-9e47-4c81-b7c3-fbe66fb52dd8'
+      deploymentId: '{{MESSENGER_DEPLOYMENT_ID}}'
     });
   </script>
 </body>
