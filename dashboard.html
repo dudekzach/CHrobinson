@@ -3,40 +3,140 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>CH Robinson – Dashboard</title>
-  <link rel="stylesheet" href="theme.css" />
+  <title>CH Robinson – Driver Orchestration Dashboard</title>
+  <link rel="stylesheet" href="../framework/theme.css" />
 </head>
 <body>
+  <!-- Shell placeholder: inlined header + nav -->
   <header class="app-header">
-    <img src="../assets/ch-robinson-logo.png" class="app-logo" alt="CH Robinson Logo" />
+    <img src="../assets/ch-robinson-logo.svg" class="app-logo" alt="CH Robinson Logo" />
   </header>
+
   <nav class="app-nav">
     <div class="app-nav-inner">
-      <a href="dashboard.html" class="app-nav-link" id="navDashboard">Dashboard</a>
+      <a href="dashboard.html" class="app-nav-link app-nav-active" id="navDashboard">Dashboard</a>
       <a href="research.html" class="app-nav-link" id="navResearch">Driver & Shipment Research</a>
       <a href="documents.html" class="app-nav-link" id="navDocuments">Playbooks & SOPs</a>
       <a href="billing.html" class="app-nav-link" id="navBilling">Billing & Loads</a>
       <a href="login.html" class="app-nav-link app-nav-right">Logout</a>
     </div>
   </nav>
+
   <main class="app-main app-page-transition">
-    <section class="app-card">
-      <h2>Demo Page: Dashboard</h2>
-      <p>This is a placeholder. See the full bundle for live code and demo data.</p>
+    <section class="app-grid">
+      <!-- Welcome / storyline card -->
+      <div class="app-card">
+        <h3>Welcome back, Elizabeth</h3>
+        <p class="app-muted">
+          This supervisor view shows how “Happy Robot 2.0” orchestrates driver status calls across
+          Virtual Agent, agents, and AI-powered WEM – replacing Avaya, Colabrio, and siloed tools.
+        </p>
+        <button class="app-btn-primary" onclick="alert('Use this to narrate Scenario 1: Driver status automation.')">
+          Run Driver Status Orchestration Story
+        </button>
+        <button class="app-btn-secondary" style="margin-left:6px;" onclick="alert('Use this to narrate Scenario 3: Supervisor insights & WEM.')">
+          Show Supervisor Insight Story
+        </button>
+        <div class="app-chip-row">
+          <span class="app-pill">Avaya Replacement</span>
+          <span class="app-pill">Agentic Virtual Agent</span>
+          <span class="app-pill">Virtual Supervisor</span>
+        </div>
+      </div>
+
+      <!-- KPI card -->
+      <div class="app-card">
+        <h4>Today’s Driver Experience KPIs</h4>
+        <div class="app-grid" style="margin-top:8px;">
+          <div>
+            <div class="app-kpi">74%</div>
+            <div class="app-kpi-label">VA Containment (Happy Robot 2.0)</div>
+          </div>
+          <div>
+            <div class="app-kpi">11.2 min</div>
+            <div class="app-kpi-label">Avg Handle Time (live agent)</div>
+          </div>
+          <div>
+            <div class="app-kpi">+23 pts</div>
+            <div class="app-kpi-label">CSAT vs legacy stack</div>
+          </div>
+        </div>
+        <p class="app-muted" style="margin-top:10px;">
+          These KPIs are powered by a single Genesys platform, eliminating blind spots across Avaya,
+          Colabrio, and siloed reporting.
+        </p>
+      </div>
+
+      <!-- Real-time queues -->
+      <div class="app-card">
+        <h4>Real-Time Driver Queues</h4>
+        <table class="app-table">
+          <thead>
+            <tr>
+              <th>Queue</th>
+              <th>In Queue</th>
+              <th>Longest Wait</th>
+              <th>SL%</th>
+              <th>AI Assist</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Driver Status – Voice</td>
+              <td>7</td>
+              <td>02:31</td>
+              <td>92%</td>
+              <td><span class="badge badge-success">VA + Copilot</span></td>
+            </tr>
+            <tr>
+              <td>Driver Status – Messaging</td>
+              <td>3</td>
+              <td>00:47</td>
+              <td>97%</td>
+              <td><span class="badge badge-success">VA</span></td>
+            </tr>
+            <tr>
+              <td>Exception Handling</td>
+              <td>4</td>
+              <td>03:05</td>
+              <td>88%</td>
+              <td><span class="badge badge-info">Copilot</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- WEM / AUX insight -->
+      <div class="app-card">
+        <h4>Virtual Supervisor Insight</h4>
+        <p class="app-muted">
+          Genesys Virtual Supervisor continuously analyzes interactions and agent states – replacing manual
+          QA in Colabrio and surfacing coaching moments automatically.
+        </p>
+        <ul class="app-muted">
+          <li><strong>470 hrs/month</strong> saved via AI-scored calls and auto-QA.</li>
+          <li><strong>13% of agents</strong> flagged for adherence coaching this week.</li>
+          <li><strong>“Driver Status – Voice”</strong> shows higher RNA after 5 p.m. CT.</li>
+        </ul>
+        <button class="app-btn-secondary" onclick="alert('Use this to narrate Virtual Supervisor & WEM analytics.')">
+          View Coaching Opportunities
+        </button>
+      </div>
     </section>
   </main>
+
+  <!-- Messenger snippet -->
   <script type="text/javascript" charset="utf-8">
     (function (g, e, n, es, ys) {
       g['_genesysJs'] = e;
-      g[e] = g[e] || function () {
-        (g[e].q = g[e].q || []).push(arguments)
-      };
+      g[e] = g[e] || function () { (g[e].q = g[e].q || []).push(arguments) };
       g[e].t = 1 * new Date();
       g[e].c = es;
-      ys = document.createElement('script'); ys.async = 1; ys.src = n; ys.charset = 'utf-8'; document.head.appendChild(ys);
+      ys = document.createElement('script'); ys.async = 1; ys.src = n;
+      ys.charset = 'utf-8'; document.head.appendChild(ys);
     })(window, 'Genesys', 'https://apps.mypurecloud.com/genesys-bootstrap/genesys.min.js', {
       environment: 'prod',
-      deploymentId: '0042b643-9e47-4c81-b7c3-fbe66fb52dd8'
+      deploymentId: '{{MESSENGER_DEPLOYMENT_ID}}'
     });
   </script>
 </body>
