@@ -3,40 +3,97 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>CH Robinson – Billing</title>
+  <title>CH Robinson – Billing & Loads</title>
   <link rel="stylesheet" href="theme.css" />
 </head>
 <body>
   <header class="app-header">
-    <img src="../assets/ch-robinson-logo.png" class="app-logo" alt="CH Robinson Logo" />
+    <img src="../assets/ch-robinson-logo.svg" class="app-logo" alt="CH Robinson Logo" />
   </header>
+
   <nav class="app-nav">
     <div class="app-nav-inner">
       <a href="dashboard.html" class="app-nav-link" id="navDashboard">Dashboard</a>
       <a href="research.html" class="app-nav-link" id="navResearch">Driver & Shipment Research</a>
       <a href="documents.html" class="app-nav-link" id="navDocuments">Playbooks & SOPs</a>
-      <a href="billing.html" class="app-nav-link" id="navBilling">Billing & Loads</a>
+      <a href="billing.html" class="app-nav-link app-nav-active" id="navBilling">Billing & Loads</a>
       <a href="login.html" class="app-nav-link app-nav-right">Logout</a>
     </div>
   </nav>
+
   <main class="app-main app-page-transition">
-    <section class="app-card">
-      <h2>Demo Page: Billing</h2>
-      <p>This is a placeholder. See the full bundle for live code and demo data.</p>
+    <section class="app-grid">
+      <div class="app-card">
+        <h3>Loads with Open Billing Questions</h3>
+        <table class="app-table">
+          <thead>
+            <tr>
+              <th>Load #</th>
+              <th>Customer</th>
+              <th>Issue</th>
+              <th>Amount</th>
+              <th>AI Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>LD-661908</td>
+              <td>Major Retailer A</td>
+              <td>Detention dispute</td>
+              <td>$420.00</td>
+              <td><span class="badge badge-warning">Needs review</span></td>
+            </tr>
+            <tr>
+              <td>LD-772104</td>
+              <td>Regional Grocer B</td>
+              <td>Short pay</td>
+              <td>$1,280.00</td>
+              <td><span class="badge badge-info">AI suggested outcome</span></td>
+            </tr>
+            <tr>
+              <td>LD-998312</td>
+              <td>CPG Brand C</td>
+              <td>POD mismatch</td>
+              <td>$615.50</td>
+              <td><span class="badge badge-success">Resolved via VA</span></td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="app-muted" style="margin-top:10px;">
+          Tie this back to how AI-led routing and summaries not only improve driver experience,
+          but also protect margin on each load.
+        </p>
+      </div>
+
+      <div class="app-card">
+        <h3>Value Story – From Calls to Dollars</h3>
+        <p class="app-muted">
+          Use this card to connect operational improvements to financial outcomes.
+        </p>
+        <ul class="app-muted">
+          <li>70–80% containment on status calls reduces voice cost and frees agents for exceptions.</li>
+          <li>AI-powered QA and coaching save hundreds of hours per month for supervisors.</li>
+          <li>Better visibility into driver/RNA leads to fewer missed appointments and penalties.</li>
+        </ul>
+        <button class="app-btn-primary" onclick="alert('Use this for value conversation and MAP steps 3–5.')">
+          Transition to Value Validation Pilot Story
+        </button>
+      </div>
     </section>
   </main>
+
+  <!-- Messenger snippet -->
   <script type="text/javascript" charset="utf-8">
     (function (g, e, n, es, ys) {
       g['_genesysJs'] = e;
-      g[e] = g[e] || function () {
-        (g[e].q = g[e].q || []).push(arguments)
-      };
+      g[e] = g[e] || function () { (g[e].q = g[e].q || []).push(arguments) };
       g[e].t = 1 * new Date();
       g[e].c = es;
-      ys = document.createElement('script'); ys.async = 1; ys.src = n; ys.charset = 'utf-8'; document.head.appendChild(ys);
+      ys = document.createElement('script'); ys.async = 1; ys.src = n;
+      ys.charset = 'utf-8'; document.head.appendChild(ys);
     })(window, 'Genesys', 'https://apps.mypurecloud.com/genesys-bootstrap/genesys.min.js', {
       environment: 'prod',
-      deploymentId: '0042b643-9e47-4c81-b7c3-fbe66fb52dd8'
+      deploymentId: '{{MESSENGER_DEPLOYMENT_ID}}'
     });
   </script>
 </body>
