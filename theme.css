@@ -1,2 +1,254 @@
-:root{--brand-primary:#005bab;--brand-primary-dark:#00427f;--bg-light:#f4f7fb;--card-bg:#fff;--border-radius:12px;--text-main:#1f2933;--text-muted:#6b7280;--border-subtle:#e2e2e2;}body{background:var(--bg-light);color:var(--text-main);font-family:Segoe UI,system-ui,sans-serif;}
-/* ...truncated for brevity, full version is as above... */
+/* framework/theme.css - CH Robinson themed */
+
+:root {
+  --brand-primary: #005bab;         /* CH Robinson blue-ish */
+  --brand-primary-dark: #00427f;
+  --bg-light: #f4f7fb;
+  --card-bg: #ffffff;
+  --border-radius: 12px;
+  --text-main: #1f2933;
+  --text-muted: #6b7280;
+  --border-subtle: #e2e2e2;
+}
+
+/* Base */
+body {
+  margin: 0;
+  font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: var(--bg-light);
+  color: var(--text-main);
+}
+
+/* Header */
+.app-header {
+  background-color: var(--brand-primary);
+  color: #fff;
+  padding: 14px 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+.app-logo {
+  height: 44px;
+  width: auto;
+  display: block;
+}
+
+/* Nav */
+.app-nav {
+  background-color: #fff;
+  border-bottom: 1px solid var(--border-subtle);
+  position: fixed;
+  top: 72px;
+  left: 0;
+  right: 0;
+  z-index: 999;
+}
+
+.app-nav-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  padding: 8px 24px;
+  gap: 16px;
+  align-items: center;
+}
+
+.app-nav-link {
+  text-decoration: none;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  padding: 6px 10px;
+  border-radius: 999px;
+}
+
+.app-nav-link:hover {
+  background-color: #f0f4ff;
+}
+
+.app-nav-active {
+  background-color: var(--brand-primary);
+  color: #fff;
+}
+
+.app-nav-right {
+  margin-left: auto;
+}
+
+/* Layout */
+.app-main {
+  max-width: 1100px;
+  margin: 140px auto 24px;
+  padding: 0 16px;
+}
+
+.app-card {
+  background-color: var(--card-bg);
+  border-radius: var(--border-radius);
+  padding: 18px 20px;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.06);
+  border: 1px solid #e5e7eb;
+}
+
+.app-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.app-muted {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.app-kpi {
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.app-kpi-label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* Buttons */
+.app-btn-primary,
+.app-btn-secondary {
+  border: none;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.app-btn-primary {
+  background-color: var(--brand-primary);
+  color: #fff;
+}
+
+.app-btn-primary:hover {
+  background-color: var(--brand-primary-dark);
+}
+
+.app-btn-secondary {
+  background-color: #fff;
+  color: var(--brand-primary);
+  border: 1px solid var(--brand-primary);
+}
+
+.app-btn-secondary:hover {
+  background-color: #e5f0ff;
+}
+
+/* Tags / pills */
+.app-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: #eef2ff;
+  font-size: 0.7rem;
+  color: #4338ca;
+}
+
+/* Page transition */
+.app-page-transition {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: pageFadeIn 0.45s ease forwards;
+}
+
+@keyframes pageFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Two-column layout */
+.app-layout-2col {
+  display: grid;
+  grid-template-columns: minmax(260px, 320px) minmax(0, 1fr);
+  gap: 16px;
+}
+
+@media (max-width: 768px) {
+  .app-layout-2col {
+    grid-template-columns: 1fr;
+  }
+
+  .app-main {
+    margin-top: 128px;
+  }
+}
+
+/* Simple table styles */
+.app-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.app-table th,
+.app-table td {
+  border-bottom: 1px solid #e5e7eb;
+  padding: 8px 6px;
+  text-align: left;
+}
+
+.app-table th {
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.app-table tr:hover td {
+  background: #f3f4ff;
+}
+
+/* Chips row */
+.app-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+/* Status badges */
+.badge {
+  display: inline-flex;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  align-items: center;
+  gap: 4px;
+}
+
+.badge-success {
+  background: #ecfdf3;
+  color: #15803d;
+}
+
+.badge-warning {
+  background: #fff7ed;
+  color: #c2410c;
+}
+
+.badge-info {
+  background: #e0f2fe;
+  color: #0369a1;
+}
