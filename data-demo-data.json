@@ -1,8 +1,117 @@
 {
-  "tasks": [],
-  "clients": [],
-  "documents": [],
-  "invoices": [],
-  "insights": [],
-  "knowledgeArticles": []
+  "tasks": [
+    {
+      "id": "task-1",
+      "title": "Review Virtual Supervisor flags for Driver Status – Voice",
+      "owner": "Elizabeth Smelter",
+      "dueDate": "2025-01-15",
+      "status": "In Progress",
+      "tags": ["Virtual Supervisor", "QA", "Driver Status"]
+    },
+    {
+      "id": "task-2",
+      "title": "Tune Happy Robot 2.0 intent for detention calls",
+      "owner": "Admin – CX Ops",
+      "dueDate": "2025-01-10",
+      "status": "Not Started",
+      "tags": ["AI Studio", "Detention", "Virtual Agent"]
+    },
+    {
+      "id": "task-3",
+      "title": "Validate Navisphere data mapping into Copilot",
+      "owner": "Cristof",
+      "dueDate": "2025-01-20",
+      "status": "Blocked",
+      "tags": ["Copilot", "Navisphere", "Integration"]
+    }
+  ],
+  "clients": [
+    {
+      "id": "cust-1",
+      "name": "Major Retailer A",
+      "segment": "Retail",
+      "avgMonthlyLoads": 2200,
+      "notes": "High sensitivity to on-time delivery; strong candidate for Journey Management."
+    },
+    {
+      "id": "cust-2",
+      "name": "Regional Grocer B",
+      "segment": "Grocery",
+      "avgMonthlyLoads": 800,
+      "notes": "Detention and dwell time key focus areas."
+    }
+  ],
+  "documents": [
+    {
+      "id": "doc-driver-va",
+      "title": "Driver Status – Virtual Agent Script",
+      "category": "Driver Automation",
+      "summary": "Script and flows for Happy Robot 2.0 handling status calls.",
+      "link": "templates/documents.html#driver_va"
+    },
+    {
+      "id": "doc-copilot",
+      "title": "Agent Copilot – Navisphere Assist",
+      "category": "Agent Empowerment",
+      "summary": "How Copilot surfaces Navisphere insights for agents.",
+      "link": "templates/documents.html#copilot_navisphere"
+    },
+    {
+      "id": "doc-virtual-supervisor",
+      "title": "Virtual Supervisor – QA & Coaching",
+      "category": "Supervisor Insight",
+      "summary": "AI-based QA and coaching workflows for driver calls.",
+      "link": "templates/documents.html#virtual_supervisor"
+    }
+  ],
+  "invoices": [
+    {
+      "id": "inv-661908",
+      "loadNumber": "LD-661908",
+      "customer": "Major Retailer A",
+      "amount": 420.0,
+      "currency": "USD",
+      "status": "Disputed",
+      "reason": "Detention dispute",
+      "aiSuggestedOutcome": "Split detention charges and update contract terms."
+    },
+    {
+      "id": "inv-772104",
+      "loadNumber": "LD-772104",
+      "customer": "Regional Grocer B",
+      "amount": 1280.0,
+      "currency": "USD",
+      "status": "Under Review",
+      "reason": "Short pay",
+      "aiSuggestedOutcome": "Validate accessorials and propose credit memo for disputed fees."
+    }
+  ],
+  "insights": [
+    {
+      "id": "insight-1",
+      "title": "Driver status calls now 74% contained in Virtual Agent",
+      "description": "Happy Robot 2.0 handles routine status calls, freeing agents for exceptions.",
+      "metric": "74%",
+      "impact": "Reduced voice cost and shorter wait times."
+    },
+    {
+      "id": "insight-2",
+      "title": "470+ supervisor hours saved per month",
+      "description": "Virtual Supervisor auto-scores calls and surfaces coaching moments.",
+      "metric": "470 hrs/mo",
+      "impact": "Supervisors focus on high-value coaching instead of manual QA."
+    },
+    {
+      "id": "insight-3",
+      "title": "Improved CSAT on driver interactions",
+      "description": "Driver journeys orchestrated across VA, agents, and Teams-integrated WEM.",
+      "metric": "+25 pts",
+      "impact": "Higher driver loyalty and fewer escalations."
+    }
+  ],
+  "knowledgeArticles": [
+    "ka-driver-status-va",
+    "ka-copilot-navisphere",
+    "ka-virtual-supervisor"
+  ]
 }
